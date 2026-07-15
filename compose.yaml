@@ -11,6 +11,7 @@ services:
     container_name: komodo-periphery
     labels:
       komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    init: true # This should be added regardless of version
     restart: unless-stopped
     ## https://komo.do/docs/connect-servers#configuration
     environment:
@@ -32,6 +33,8 @@ services:
     volumes:
       ## Mount external docker socket
       - /var/run/docker.sock:/var/run/docker.sock
+      ## Mount keys directory
+      - /config/keys:/config/keys
       ## Allow Periphery to see processes outside of container
       - /proc:/proc
       ## Specify the Periphery agent root directory.
